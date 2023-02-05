@@ -1,0 +1,13 @@
+diff --git a/platformio.ini b/platformio.ini
+index 0abb4ac388..bcfbb78230 100644
+--- a/platformio.ini
++++ b/platformio.ini
+@@ -18,7 +18,7 @@
+ [platformio]
+ src_dir      = Marlin
+ boards_dir   = buildroot/share/PlatformIO/boards
+-default_envs = mega2560
++default_envs = STM32F103RE_btt
+ include_dir  = Marlin
+
+ #

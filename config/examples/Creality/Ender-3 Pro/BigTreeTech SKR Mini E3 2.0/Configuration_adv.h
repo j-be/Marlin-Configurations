@@ -1126,7 +1126,7 @@
 #define DEFAULT_STEPPER_DEACTIVE_TIME 120
 #define DISABLE_INACTIVE_X
 #define DISABLE_INACTIVE_Y
-#define DISABLE_INACTIVE_Z  // Disable if the nozzle could fall onto your printed part!
+//#define DISABLE_INACTIVE_Z  // Disable if the nozzle could fall onto your printed part!
 //#define DISABLE_INACTIVE_I
 //#define DISABLE_INACTIVE_J
 //#define DISABLE_INACTIVE_K

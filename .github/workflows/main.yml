@@ -1,0 +1,54 @@
+name: Build Marlin
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Setup PlatformIO
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+
+      # Clone Marlin
+      - name: Clone Marlin source
+        uses: actions/checkout@v2
+        with:
+          repository: MarlinFirmware/Marlin
+          ref: refs/tags/2.1.2
+          path: Marlin
+
+      # Copy over configs
+      - run: cp "config/examples/Creality/Ender-3 Pro/BigTreeTech SKR Mini E3 2.0/Configuration.h" "Marlin/Marlin/"
+      - run: cp "config/examples/Creality/Ender-3 Pro/BigTreeTech SKR Mini E3 2.0/Configuration_adv.h" "Marlin/Marlin/"
+
+      # Build
+      - name: Run PlatformIO
+        run: cd Marlin && pio run -e STM32F103RE_btt
+
+      # Upload build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: firmware.bin
+          path: "Marlin/.pio/build/STM32F103RE_btt/firmware.bin"

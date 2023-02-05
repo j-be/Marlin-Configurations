@@ -2275,19 +2275,19 @@
  *   Caveats: The ending Z should be the same as starting Z.
  * Attention: EXPERIMENTAL. G-code arguments may change.
  */
-//#define NOZZLE_CLEAN_FEATURE
+#define NOZZLE_CLEAN_FEATURE
 
 #if ENABLED(NOZZLE_CLEAN_FEATURE)
   // Default number of pattern repetitions
-  #define NOZZLE_CLEAN_STROKES  12
+  #define NOZZLE_CLEAN_STROKES  2
 
   // Default number of triangles
-  #define NOZZLE_CLEAN_TRIANGLES  3
+  #define NOZZLE_CLEAN_TRIANGLES  4
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT { {  30, 30, (Z_MIN_POS + 1) } }
-  #define NOZZLE_CLEAN_END_POINT   { { 100, 60, (Z_MIN_POS + 1) } }
+  #define NOZZLE_CLEAN_START_POINT { { 2, -5, 3 } }
+  #define NOZZLE_CLEAN_END_POINT   { { 50, -26, 3 } }
 
   // Circular pattern radius
   #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5
@@ -2297,7 +2297,7 @@
   #define NOZZLE_CLEAN_CIRCLE_MIDDLE NOZZLE_CLEAN_START_POINT
 
   // Move the nozzle to the initial position after cleaning
-  #define NOZZLE_CLEAN_GOBACK
+  //#define NOZZLE_CLEAN_GOBACK
 
   // For a purge/clean station that's always at the gantry height (thus no Z move)
   //#define NOZZLE_CLEAN_NO_Z
@@ -2310,7 +2310,7 @@
   //#define NOZZLE_CLEAN_HEATUP       // Heat up the nozzle instead of skipping wipe
 
   // Explicit wipe G-code script applies to a G12 with no arguments.
-  //#define WIPE_SEQUENCE_COMMANDS "G1 X-17 Y25 Z10 F4000\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nG0 X-10.0 Y-9.0"
+  #define WIPE_SEQUENCE_COMMANDS "G1 X10 Y0\n G1 Y-15\nG1 X45\nG1 Y-10\nG1 X2"
 
 #endif
 
